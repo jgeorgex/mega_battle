@@ -1,8 +1,11 @@
 class Player
-attr_reader :name
+  attr_reader :name, :hp
 
-def initialize(name)
-@name = name
-end
+  INTIAL_HP = 50
+
+  def initialize(name)
+    @name = name
+    @hp = INTIAL_HP
+  end
 
 end
