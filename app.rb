@@ -9,38 +9,39 @@ class Battle < Sinatra::Base
   end
 
   post '/names' do
-    $player_1 = Player.new(params[:player_1_name])
-    $player_2 = Player.new(params[:player_2_name])
-    $game = Game.new
+    player1 = Player.new(params[:player_1_name])
+    player2 = Player.new(params[:player_2_name])
+    $game = Game.new(player1, player2)
     redirect '/play'
 
   end
 
   get '/play' do
-    @player_1_name = $player_1.name
-    @player_2_name = $player_2.name
-    @player1_hp = $player_1.hp
-    @player2_hp = $player_2.hp
+    @player_1_name = $game.p1_name
+    @player_2_name = $game.p2_name
+    @player1_hp = $game.p1_hp
+    @player2_hp = $game.p2_hp
     erb :play
   end
 
   get '/attack_p1' do
-    @victim = $player_1.name
-    @attacker = $player_2.name
-    @player1 = $player_1.name
-    @player2 = $player_2.name
-    @player1_hp = $game.attack($player_1)
-    @player2_hp = $player_2.hp
+    @victim = $game.p1_name
+    @attacker = $game.p2_name
+    @player1 = $game.p1_name
+    @player2 = $game.p2_name
+    p $game.player1
+    @player1_hp = $game.attack($game.player1)
+    @player2_hp = $game.p2_hp
     erb:attack
   end
 
   get '/attack_p2' do
-    @attacker = $player_1.name
-    @victim = $player_2.name
-    @player1 = $player_1.name
-    @player2 = $player_2.name
-    @player1_hp = $player_1.hp
-    @player2_hp = $game.attack($player_2)
+    @attacker = $game.p1_name
+    @victim = $game.p2_name
+    @player1 = $game.p1_name
+    @player2 = $game.p2_name
+    @player1_hp = $game.p1_hp
+    @player2_hp = $game.attack($game.player2)
     erb:attack
   end
   # start the server if ruby file executed directly
