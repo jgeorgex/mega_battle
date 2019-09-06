@@ -11,7 +11,7 @@ feature 'so I can win a game' do
   end
   scenario 'I reduce my oppenents hit points by 10 when I attack' do
     sign_in_and_play
-    click_button 'Attack_P1'
-    expect(page).to have_content 'Dave HP = 40'
+    click_button 'Attack_P2'
+    expect(page).to have_content 'Mittens HP = 40'
   end
 end

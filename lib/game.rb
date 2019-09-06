@@ -1,7 +1,7 @@
 class Game
 attr_reader :p1_name, :p2_name, :p1_hp, :p2_hp, :player1, :player2
 
-  def initialize(p1=Player.new, p2=Player.new)
+  def initialize(p1, p2)
     @player1 = p1
     @player2 = p2
     @p1_name = @player1.name
@@ -12,6 +12,7 @@ attr_reader :p1_name, :p2_name, :p1_hp, :p2_hp, :player1, :player2
 
   def attack(player)
     player.hp -= 10
+    @p2_hp = player.hp
   end
 
 end

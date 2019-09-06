@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './lib/player'
+require './lib/game'
 
 class Battle < Sinatra::Base
   enable :sessions
@@ -17,31 +18,24 @@ class Battle < Sinatra::Base
   end
 
   get '/play' do
-    @player_1_name = $game.p1_name
-    @player_2_name = $game.p2_name
-    @player1_hp = $game.p1_hp
-    @player2_hp = $game.p2_hp
+    @game = $game
     erb :play
   end
 
   get '/attack_p1' do
     @victim = $game.p1_name
     @attacker = $game.p2_name
-    @player1 = $game.p1_name
-    @player2 = $game.p2_name
-    p $game.player1
-    @player1_hp = $game.attack($game.player1)
-    @player2_hp = $game.p2_hp
+    @game = $game
+    @game.attack($game.player1)
+
     erb:attack
   end
 
   get '/attack_p2' do
     @attacker = $game.p1_name
     @victim = $game.p2_name
-    @player1 = $game.p1_name
-    @player2 = $game.p2_name
-    @player1_hp = $game.p1_hp
-    @player2_hp = $game.attack($game.player2)
+    @game = $game
+    @game.attack($game.player2)
     erb:attack
   end
   # start the server if ruby file executed directly
